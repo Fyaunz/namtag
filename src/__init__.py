@@ -1,0 +1,2 @@
+"""Namensschilder-Generator Quellcode-Paket."""
+
