@@ -12,7 +12,21 @@ Generiert automatisch druckfertige Namensschilder im Standardmaß (**90 × 54 mm
 
 Das Skript benötigt lediglich `fpdf2` (reines Python, läuft unter macOS, Windows und Linux):
 
+### Mit [uv](https://docs.astral.sh/uv/) (empfohlen)
+
 ```bash
+uv venv                             # virtuelle Umgebung in .venv anlegen
+source .venv/bin/activate           # aktivieren (Windows: .venv\Scripts\activate)
+uv pip install -r requirements.txt  # Abhängigkeiten installieren
+```
+
+Alternativ ohne Aktivieren: `uv run --with-requirements requirements.txt python namensschilder.py`
+
+### Mit pip
+
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
 pip install -r requirements.txt
 ```
 
