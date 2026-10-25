@@ -83,10 +83,10 @@ python3 namensschilder.py [OPTIONEN]
 | `-l`, `--logo`   | Pfad zur Logo-Datei (`.svg`, `.png`, `.jpg`)                                                       | `img/Logo_NAJU_ohneSchriftzug_blau.png` |
 | `-f`, `--font`   | Schriftart (z. B. `Open Sans`, `Arial`, `Verdana`, `Helvetica`)                                    | `Open Sans`                             |
 | `--no-logo`      | Namensschilder ohne Logo erstellen                                                                 | –                                       |
-| `--no-pronouns`  | Schreiblinie für Pronomen unter dem Namen ausblenden                                               | –                                       |
-| `--fill-blank`   | Restliche Plätze auf der letzten Seite mit Blanko-Schildern (inkl. Logo & Pronomenlinie) auffüllen | –                                       |
-| `--width`        | Breite eines Schildes in mm                                                                        | `90`                                    |
-| `--height`       | Höhe eines Schildes in mm                                                                          | `54`                                    |
+| `--no-pronouns`   | Schreiblinie für Pronomen unter dem Namen ausblenden                                                      | –                                       |
+| `--no-fill-blank` | Restliche Plätze auf der letzten Seite komplett leer lassen (statt Blanko-Schilder mit Schreiblinien)     | –                                       |
+| `--width`         | Breite eines Schildes in mm                                                                               | `90`                                    |
+| `--height`        | Höhe eines Schildes in mm                                                                                 | `54`                                    |
 
 ### Beispiele
 
@@ -94,8 +94,8 @@ python3 namensschilder.py [OPTIONEN]
 # Eigene CSV-Datei und eigenes Logo verwenden
 python3 namensschilder.py -i liste.csv -o druckbogen.pdf --logo verband_logo.png
 
-# Letzten A4-Bogen mit Blanko-Schildern zum Vor-Ort-Beschriften auffüllen
-python3 namensschilder.py --fill-blank
+# Restliche Plätze auf dem letzten Bogen komplett weiß lassen (ohne Schreiblinien/Logo)
+python3 namensschilder.py --no-fill-blank
 ```
 
 ## Druckhinweis

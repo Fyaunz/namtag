@@ -278,6 +278,7 @@ def draw_badge(
             if single_line_pt < wrap_threshold_pt and (" " in name or "-" in name):
                 name_lines = split_text_two_lines(name)
 
+        is_blank_badge = not name_lines and not func_lines
         is_multiline_name = len(name_lines) > 1
 
         # Vertikale Ankerpunkte (dynamisch angepasst für 1- oder 2-zeilige Namen)
@@ -286,9 +287,9 @@ def draw_badge(
             pronoun_line_y = y + (h * 0.62 if is_multiline_name else h * 0.60)
             first_func_y = y + (h * 0.78 if len(func_lines) > 1 else h * 0.81)
         else:
-            if not func_lines:
+            if not func_lines and not is_blank_badge:
                 name_baseline_y = y + (h * 0.50 if is_multiline_name else h * 0.56)
-            elif len(func_lines) == 1:
+            elif len(func_lines) <= 1:
                 name_baseline_y = y + (h * 0.44 if is_multiline_name else h * 0.50)
             else:
                 name_baseline_y = y + (h * 0.42 if is_multiline_name else h * 0.475)
@@ -309,6 +310,13 @@ def draw_badge(
                 ny = name_baseline_y + idx * name_line_spacing
                 line_w = pdf.get_string_width(nline)
                 pdf.text(x=x + (w - line_w) / 2.0, y=ny, text=nline)
+        else:
+            # Schreiblinie für den Namen bei Blanko-Schildern
+            name_line_w = w * 0.72
+            name_line_start_x = x + (w - name_line_w) / 2.0
+            pdf.set_draw_color(195, 195, 195)
+            pdf.set_line_width(0.3)
+            pdf.line(name_line_start_x, name_baseline_y, name_line_start_x + name_line_w, name_baseline_y)
 
         # 3. Dezente hellgraue Schreiblinie für Pronomen direkt unter dem Namen
         if show_pronoun_field:
@@ -333,6 +341,13 @@ def draw_badge(
                 fy = first_func_y + idx * line_spacing
                 line_w = pdf.get_string_width(fline)
                 pdf.text(x=x + (w - line_w) / 2.0, y=fy, text=fline)
+        elif is_blank_badge:
+            # Schreiblinie für die Funktion bei Blanko-Schildern
+            func_line_w = w * 0.60
+            func_line_start_x = x + (w - func_line_w) / 2.0
+            pdf.set_draw_color(195, 195, 195)
+            pdf.set_line_width(0.3)
+            pdf.line(func_line_start_x, first_func_y, func_line_start_x + func_line_w, first_func_y)
 
 
 def draw_cut_lines(
@@ -393,7 +408,7 @@ def generate_pdf(
     badge_w: float = DEFAULT_BADGE_W_MM,
     badge_h: float = DEFAULT_BADGE_H_MM,
     logo_path: Optional[Path] = None,
-    fill_empty: bool = False,
+    fill_empty: bool = True,
     show_pronoun_field: bool = True,
     font_name: str = DEFAULT_FONT,
 ) -> int:

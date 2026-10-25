@@ -69,7 +69,14 @@ def main() -> None:
     parser.add_argument(
         "--fill-blank",
         action="store_true",
-        help="Restliche Plätze auf dem letzten A4-Bogen mit Blanko-Schildern auffüllen",
+        default=True,
+        help="Restliche Plätze auf dem letzten A4-Bogen mit Blanko-Schildern (mit Schreiblinien) auffüllen (Standard: aktiv)",
+    )
+    parser.add_argument(
+        "--no-fill-blank",
+        action="store_false",
+        dest="fill_blank",
+        help="Restliche Plätze auf dem letzten A4-Bogen komplett leer lassen",
     )
     parser.add_argument(
         "--no-pronouns",
